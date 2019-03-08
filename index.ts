@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { CometService } from '@decent-bet/connex-entities';
+import { CometService, ContractService } from '@decent-bet/connex-entities';
 import _Vue from 'vue';
+import { IConnexContract } from '@decent-bet/connex-entities/types';
 
 export function ConnexEntityContract(Vue: typeof _Vue, options?: any): void {
   Vue.prototype.$contractEntities = {};
@@ -12,9 +13,13 @@ export function ConnexEntityContract(Vue: typeof _Vue, options?: any): void {
       const { chainTag, publicAddress } = await rq();
 
       if (options.entities) {
-        options.entities.forEach((i: { name: string | number; contract: new (a,b,c) => Function; }) => {
+        options.entities.forEach((i: { name: string | number; contract: new () => IConnexContract; }) => {
           // eslint-disable-next-line new-cap
-          Vue.prototype.$contractEntities[i.name] = new i.contract(connex as Connex, chainTag, publicAddress);
+          const instance = new i.contract() as IConnexContract;
+          instance.onConnexReady(connex as Connex, chainTag, publicAddress);
+          instance.contractService.__setConnexReady(connex as Connex, chainTag, publicAddress);
+
+           Vue.prototype.$contractEntities[i.name] = instance;
         });
       }
     
