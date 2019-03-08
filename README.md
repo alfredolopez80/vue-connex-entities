@@ -51,12 +51,11 @@ The following instance variables are available:
 
 * `$requestExternalWalletAccess`: Request access to external wallet
 * `$contractEntities`: The contract entities created after external wallet access sucess.
-* `$connex`: Access to the static ConnexService
 
 ```typescript
   async loginComet() {
     await this.$requestExternalWalletAccess();
 
-    const vthoBalance = await this.$contractEntities.Energy.balanceOf(this.$connex.defaultAccount);
+    const vthoBalance = await this.$contractEntities.Energy.balanceOf();
   }
 ```
