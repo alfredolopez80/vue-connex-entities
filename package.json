@@ -1,6 +1,6 @@
 {
   "name": "@decent-bet/vue-connex-entities",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "Vue plugin for @decent-bet/connex-entities",
   "main": "lib/index.js",
   "directories": {
@@ -29,7 +29,7 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "@decent-bet/connex-entities": "2.0.3",
+    "@decent-bet/connex-entities": "2.5.0",
     "bignumber.js": "^8.1.1",
     "ethereum-regex": "^1.1.5",
     "rxjs": "^6.4.0",
